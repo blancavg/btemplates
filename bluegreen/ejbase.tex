@@ -1,0 +1,409 @@
+\documentclass{beamer}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{fancybox}
+\usepackage{helvet} %este guta
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{relsize}
+
+\hypersetup{
+    pdffitwindow=true,      % page fit to window when opened
+    pdftitle={My title},    % title
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\usetheme{Boadilla} 
+\useoutertheme{infolines} %pone numero de p'agina
+\setbeamertemplate{navigation symbols}{}
+%\usecolortheme[RGB={205,173,0}]{structure} 
+%\usecolortheme[RGB={154,144,144}]{structure} %gray
+
+\definecolor{mypink}{rgb}{0.7,0.2,0.3}
+\definecolor{mynavyblue}{rgb}{0.08,0.06,0.4}
+
+%%%%%%%%%% pone el t'itulo de los frames al centro
+%\setbeamercolor{frametitle}{fg=mypink}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[]{Evaluaci\'{o}n de sistemas de recomendaci\'{o}n\\Avances}
+\author[]{Grupo de servicios de recomendaci\'{o}n\\CENIDET}
+\institute[Cenidet]{}
+\date{Marzo 2, 2011}
+
+\begin{document}
+
+%%%%%%%%%%%% includeonly
+%\includeonlyframes{ggplot2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \titlepage
+%  \begin{figure}
+%    \includegraphics[width=2cm,keepaspectratio]{theimg/logoinaoe}
+%  \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Contenido}
+\begin{frame}{Contenido}
+  %\color{mynavyblue}\textbf{Texto}
+  \tableofcontents%[pausesections]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% SECTION 1 INTRODUCTION
+\section{Introducci\'{o}n}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% motiva
+\begin{frame}[label=antecedentes]
+\frametitle{}
+    \begin{block}{Knowledge Discovery in Databases}
+    Extracci'on no trivial de informaci'on expl'icita, previamente  desconocida y potencialmente 'util a partir de datos~\cite{hahsler:GeyerSchulz2002d}
+    \end{block}
+\end{frame} 
+%----------
+\begin{frame}[label=motiva]
+\frametitle{Proceso de KDD}
+\begin{figure}[h]
+    \centering
+    \includegraphics[keepaspectratio,width=12.5cm]{theimg/kddl}
+\end{figure}
+\end{frame} 
+%----------
+\begin{frame}[label=recsyskdd]
+\frametitle{Metodolog'ia de evaluaci'on como proceso de KDD}
+    \begin{figure}[h]
+    \centering
+    \includegraphics[keepaspectratio,width=12.3cm]{theimg/kddrecsys}
+    \end{figure}
+    \vspace{-1.5cm}
+    \begin{figure}[h]
+    \flushleft
+    \includegraphics[keepaspectratio,,width=5cm]{theimg/kddrecsys2}
+    \end{figure}
+\end{frame} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%% SECTION 2 Pre-procesamiento
+\section{Pre-procesamiento}
+\begin{frame}[label=prepro]
+\frametitle{Pre-procesamiento}
+\vspace{0.3cm}
+\begin{columns}[T]
+    \column{.5\textwidth}
+    \begin{itemize}
+    %\setlength{\itemsep}{-\parsep}
+    \item Datos incorrectos, an'alisis incorrecto.
+    \item Formato adecuado para an'alisis.
+    \end{itemize}
+        
+    \column{.5\textwidth}   
+    %\vspace{1cm}
+    \begin{itemize}
+    %\setlength{\itemsep}{-\parsep}
+    \item Eliminar registros vac'ios.
+    \item Eliminar caracteres no v'alidos.
+    \item Eliminar datos no relevantes.
+    \item Datos faltantes: \textquestiondown qu'e se les hace?
+    \end{itemize}     
+\end{columns}
+\vspace{0.3cm}
+\begin{figure}[h]
+    \centering
+    \includegraphics[keepaspectratio,width=5cm]{theimg/escoba}
+    \end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% SECTION 3 Análisis descriptivo
+\section{An'alisis descriptivo}
+\begin{frame}[label=objetivoda]
+\frametitle{An'alisis descriptivo: objetivo}
+\begin{itemize}
+    \setlength\itemsep{0.7cm}
+    \item Dar un primer acercamiento a los datos.
+    \item Describir los datos mediante t'ecnicas estad'isticas y gr'aficas.
+    \item Extraer caracter'isticas importantes para an'alisis posteriores.
+    \item Encontrar errores y patrones en los datos.
+    \end{itemize}   
+\end{frame} 
+%----------
+\begin{frame}[label=da]
+\frametitle{An'alisis descriptivo: mapa}
+\begin{figure}[h]
+    \centering
+    \includegraphics[keepaspectratio,width=9.5cm]{theimg/descrip}
+    \vspace{0.2cm}
+    \color{mynavyblue}\begin{tiny}[Sayad, 2010]\end{tiny}
+\end{figure}
+\end{frame} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% SECTION 4 Análisis de Bookcrossing
+\section{An'alisis univariable de Bookcrossing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}[label=bookdata]
+\frametitle{An'alisis descriptivo: Bookcrossing}
+\begin{center}
+\url{http://www.bookcrossing.com/}
+\end{center}
+\begin{enumerate}
+     \setlength\itemsep{0.7cm}
+    \item \textbf{Perfil de usuario}: ID, ubicaci'on y edad, 
+    \item \textbf{Libros}: ISBN, t'itulo, autor, a\~{n}o, editor y URLs, 
+    \item \textbf{Ratings}: ID, ISBN, rating($1$-$10$); si el rating es impl'icito, el atributo toma el valor de $0$.
+\end{enumerate}
+\end{frame}
+%----------
+\begin{frame}[label=bookprepro]
+\frametitle{Pre-procesamiento Bookcrossing}
+\begin{table}[ht]
+    \vspace{0.5cm}
+    \begin{center}
+    \begin{small}
+    \begin{tabular}{|r|r|r|r|r|r|r|r|r|} \hline
+    \textbf{Archivo} & \textbf{Raw} &  \textbf{e}&  \textbf{long} &  \textbf{sh} &  \textbf{rmvd} &  \textbf{dirtych} & \% \textbf{r}\\ [0.5ex]\hline
+    Usuarios & $278,859$ & $0$ & $159$ & $2$ & $161$ & $836,097$  & $99$ \\\hline
+    Libros  & $271,379$ & $0$ & $21,367$ & $0$ & $21,367$ & $1,250,065$&  $92$ \\\hline
+    Ratings  & $1,149,780$ & $0$ & $0$ & $0$ & $0$ & $3,449,343$ &  $100$ \\\hline
+    \end{tabular}
+    \end{small}
+    %\caption{Resultados del preprocesamiento}
+    \end{center}
+\end{table}
+\end{frame} 
+%----------
+\begin{frame}[label=conteo]
+\frametitle{Conteo}
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{|r|r|r|} \hline
+\textbf{Raw} & \textbf{Nulos} & $0$-$244$ \\ [0.5ex]\hline
+$278,698$ & $110,724$ & $167,974$ \\\hline
+\end{tabular}
+\caption{Conteo de valores del atributo \textit{Edad}. \textit{Raw} es el n'umero total de ejemplos, \textit{Nulos} es el n'umero de personas que omitieron su edad y \textbf{0-244} es el n'umero de personas que si la proporcionaron.}
+\label{tab:conteo}
+\end{center}
+\end{table}
+
+\vspace{-0.3cm}
+
+\begin{figure}[h]
+    \begin{center}
+    \subfigure[Todas las edades]{
+    \includegraphics[width=5cm,keepaspectratio]{theimg/allage_bar}
+    }
+    \hspace{0.01cm}
+    \subfigure[Nulos y no nulos]{
+    \includegraphics[width=5cm,keepaspectratio]{theimg/nullage_bar}
+    }
+    
+    \caption{Edades de los usuarios: en (a) se muestra la distribuci'on de las edades introducidas por el usuario, en (b) se muestra la comparaci'on de quienes omitieron la edad (TRUE) y los que si la registraron (FALSE).}
+    \label{fig:gruposedades}
+    \end{center}
+\end{figure}
+\end{frame}
+%----------
+\begin{frame}[label=atipicos]
+\frametitle{Valores at'ipicos}
+\begin{columns}[T]
+    \column{.5\textwidth}
+    \begin{itemize}
+    \setlength\itemsep{0.7cm}
+    \item Se calculan los cuartiles: $25$,$50$,$75$.
+    \item Valores at'ipicos: $\pm 3$ desviaciones est'andar.
+    \item Resultados: edades a partir de los $75$ a\~{n}os.
+    \end{itemize}
+        
+    \column{.5\textwidth}   
+    \vspace{-0.4cm}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[keepaspectratio,width=6cm]{theimg/boxplot}
+    \end{figure}  
+\end{columns}
+\end{frame}
+%----------
+\begin{frame}[label=edadesposibles]
+\frametitle{Rangos de edades}
+\begin{figure}[h]
+    \begin{center}
+    \subfigure[Edades sin agrupar]{
+    \includegraphics[width=5cm,keepaspectratio]{theimg/age_bar}
+    }
+    %\hspace{0.1cm}
+    \subfigure[Agrupando las edades]{
+    \includegraphics[width=5cm,keepaspectratio]{theimg/agebin_bar}
+    }    
+    %\caption{Agrupando las edades}
+    \label{fig:gruposedades}
+    \end{center}
+\end{figure}
+\end{frame}
+%----------
+\begin{frame}[label=analisisedad]
+\frametitle{Resultados: edad}
+\vspace{-0.2cm}
+Se pueden identificar tres grupos de usuario:
+\vspace{0.5cm}
+\begin{itemize}
+    \setlength\itemsep{0.7cm}
+    \item Los que omitieron la edad.
+    \item Los que proporcionaron edades at'ipicas: error o intencional.
+    \item Los que proporcionaron edades dentro del rango posible.
+    \end{itemize}  
+
+\vspace{0.5cm} 
+\begin{block}{}
+\textquestiondown C'omo influyen estas categor'ias de edad en los resultados del sistema?
+\end{block}
+
+\end{frame} 
+%----------
+\begin{frame}[label=mdedad]
+\frametitle{Medidas descriptivas: edad}
+\begin{table}[ht]
+\centering
+\begin{tiny}
+\begin{tabular}{|r|r|r|r|r|r|r|r|r|r|r|r|} \hline
+Datos & Media($\mu$) & Med & Moda & Q1 & Q2 & Q3 & Var($\sigma$) & DS($\sigma^2$) & Sk($\gamma_1$) & K($\gamma_2$)\\ [0.5ex]\hline
+con at'ip. & 34.76 & 32 & 24 & 24 & 32 & 44 & 208.16 & 14.43 & 9.05 & 1.18\\\hline
+sin at'ip. & 34.59 & 32 & 24 & 24 & 32 & 44 & 177.04 & 13.31 & 2.62 & 0.6\\\hline
+\end{tabular}
+\end{tiny}
+\end{table}
+\begin{columns}[T]
+\column{.5\textwidth}
+\begin{itemize}
+\item Edad promedio: $34.76$.
+\item Mediana: $32$.
+\item La edad m'as frecuente: $24$.
+\item La \textbf{asimetr'ia} es positiva (i.e.,$2.63$) lo que indica que la distribuci'on est'a concentrada a la izquierda.
+La \textbf{curtosis} es tambi'en positiva (i.e.,$0.6$), lo que indica que la distribuci'on es mas \textit{apuntada} que la normal.
+\item Desviaci'on est'andar: $13.31$. %El $68$\% de los usuarios tienen $34.59$ $\pm$ $13.31$ a\~{n}os (i.e., entre $47.9$ y $21.28$).
+
+\end{itemize}
+
+\column{.5\textwidth}
+\begin{figure}[h]
+    \includegraphics[width=6cm,keepaspectratio]{theimg/filtage_hist}
+     %\caption{Media y desviaci'on est'andar}
+\end{figure}
+\end{columns}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% SECTION 5 Conclusiones y trabajo en curso
+\section{Conclusiones y trabajo en curso}
+\begin{frame}[label=conclusiones1]
+\frametitle{Conclusiones}
+\begin{itemize}
+    \setlength\itemsep{0.7cm}
+    \item Se present'o una metodolog'ia para la evaluaci'on de sistemas de recomendaci'on con atributos contextuales. 
+    \item La metodolog'ia se basa en un enfoque de \textit{KDD} que incluye las fases de:
+    \begin{itemize}
+    \setlength\itemsep{0.2cm}
+    \item Preprocesamiento de datos.
+    \item An'alisis descriptivo.
+    \item An'alisis de m'etricas.
+    \item Generaci'on de reglas para clasificaci'on de m'etricas.
+    \item Evaluaci'on.
+    \item An'alisis de atributos.
+    \end{itemize}   
+\end{itemize}
+\end{frame}
+%----------
+\begin{frame}[label=conclusiones2]
+\frametitle{Conclusiones}
+\begin{itemize}
+ \setlength\itemsep{0.7cm}
+ \item Se present'o el avance en las fases de preprocesamiento de datos y an'alisis descriptivo consistente en:
+    \begin{itemize}
+    \vspace{0.3cm}
+    \setlength\itemsep{0.5cm}
+    \item Estrategia b'asica de preprocesamiento. 
+    \item Selecci'on de medidas descriptivas b'asicas.
+    \item Aplicaci'on del an'alisis univariable sobre un conjunto de datos de un sistema de recomendaci'on. 
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%----------
+\begin{frame}[label=tactual]
+\frametitle{Trabajo en curso}
+\begin{itemize}
+ \setlength\itemsep{0.7cm}
+ \item An'alisis bivariable.
+ \item Representaci'on de atributos para an'alisis por fases.
+\end{itemize}
+\end{frame}
+
+%----------
+\begin{frame}[label=bivar]
+\frametitle{Ejemplo correlaci'on}
+\begin{figure}[h]
+    \begin{center}
+    \subfigure{
+    \includegraphics[width=5.5cm,keepaspectratio]{theimg/agerating1}
+    }
+    \hspace{0.01cm}
+    \subfigure{
+    \includegraphics[width=5.5cm,keepaspectratio]{theimg/agerating2}
+    }    
+    \caption{Edad-Rating}
+   \end{center}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{}
+\begin{frame}[label=last]
+\frametitle{}
+
+\begin{center}
+Gracias
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{apalike}
+\bibliography{evan}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+%%%%%% ejemplos
+
+%\begin{block}{Introduction to {\LaTeX}}
+%"Beamer is a {\LaTeX}class for creating presentations
+%that are held using a projector..."
+%\end{block}
+
+%\begin{example}{Introduction to {\LaTeX}}
+%"Beamer is a {\LaTeX}class for creating presentations
+%that are held using a projector..."
+%\end{example}
+
+%\begin{alertblock}{Introduction to {\LaTeX}}
+%"Beamer is a {\LaTeX}class for creating presentations
+%that are held using a projector..."
+%\end{alertblock}
+
+%\begin{columns}[t]
+%\column{.5\textwidth}
+%\begin{block}{Column 1 Header}
+%Column 1 Body Text
+%\end{block}
+%\column{.5\textwidth}
+%\begin{block}{Column 2 Header}
+%Column 2 Body Text
+%\end{block}
+%\end{columns}
+
+%\shadowbox{Sample Text}
+%\fbox{Sample Text}
+%\doublebox{Sample Text}
+%\ovalbox{Sample Text}
+%\Ovalbox{Sample Text}
+
+%\section*{Proyecto postdoctoral} * para que no aparezca en el contenido

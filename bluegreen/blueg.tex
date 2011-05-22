@@ -1,0 +1,142 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+%\documentclass[xcolor=svgnames]{beamer} 
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{fancybox}
+\usepackage{helvet} %este guta
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{relsize}
+
+%\hypersetup{
+%    pdffitwindow=true,      % page fit to window when opened
+%    pdftitle={My title},    % title
+%    pdfnewwindow=true,      % links in new window
+%    colorlinks=true,       % false: boxed links; true: colored links
+%    linkcolor=purple,          % color of internal links
+%    citecolor=green,        % color of links to bibliography
+%    filecolor=magenta,      % color of file links
+%    urlcolor=cyan           % color of external links
+%}
+
+%\usetheme{Copenhagen}  % name of theme substututed here
+%\usetheme{Luebeck}
+%\usetheme{Malmoe} % Madrid y Malmoe van bien con infolines
+%\usetheme{default}
+\usetheme{Madrid} % default minimalista
+\usecolortheme{rose}
+\useoutertheme{infolines} 
+\setbeamertemplate{navigation symbols}{}
+
+% changing colors
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NavyBlue}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=CornflowerBlue}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=SpringGreen}
+
+% changing rounded blocks,comment to rounded and shadowed blocks
+\setbeamertemplate{blocks}[default]
+
+% define colors
+%\usecolortheme[RGB={205,173,0}]{structure} 
+%\usecolortheme[RGB={154,144,144}]{structure} %gray
+%\definecolor{mypink}{rgb}{0.7,0.2,0.3}
+%\definecolor{mynavyblue}{rgb}{0.08,0.06,0.4}
+
+%%%%%%%%%% pone el título de los frames al centro
+%\setbeamercolor{frametitle}{fg=blue}
+%\setbeamerfont{frametitle}{series=\bfseries}
+%\setbeamertemplate{frametitle}
+%{
+%\begin{centering}
+%\insertframetitle\par
+%\end{centering}
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%\includeonlyframes{ggplot2}
+\title{Beamer Sample}
+\subtitle{Based on Beamer version 3.06}
+\author{Blanca Vargas Govea}
+\institute[CENIDET]{Departamento de Ciencias Computacionales\\CENIDET}
+\date{\today}
+
+\begin{frame}[plain] 
+  \titlepage
+\end{frame}
+%-------------------------------------
+\section*{Contenido}
+\begin{frame}{Contenido}
+  %\color{mynavyblue}\textbf{Texto}
+  \tableofcontents%[pausesections]
+\end{frame}
+%-------------------------------------
+\section{Secci'on 1}
+\begin{frame}{Introduction}
+Intro
+\url{http://www.bookcrossing.com/}
+\end{frame}
+
+%-------------------------------------
+\section{Secci'on 2}
+
+\begin{frame}{Bloque}
+\begin{block}{Introduction to {\LaTeX}}
+"Beamer is a {\LaTeX}class for creating presentations
+that are held using a projector..."
+\end{block}
+
+\begin{example}{Introduction to {\LaTeX}}
+"Beamer is a {\LaTeX}class for creating presentations
+that are held using a projector..."
+\end{example}
+
+\begin{alertblock}{Introduction to {\LaTeX}}
+"Beamer is a {\LaTeX}class for creating presentations
+that are held using a projector..."
+\end{alertblock}
+
+\end{frame}
+%-------------------------------------
+%\bibliographystyle{apalike2}
+%\bibliography{evan}
+\end{document}
+%%%%%% ejemplos
+
+%\begin{block}{Introduction to {\LaTeX}}
+%"Beamer is a {\LaTeX}class for creating presentations
+%that are held using a projector..."
+%\end{block}
+
+%\begin{example}{Introduction to {\LaTeX}}
+%"Beamer is a {\LaTeX}class for creating presentations
+%that are held using a projector..."
+%\end{example}
+
+%\begin{alertblock}{Introduction to {\LaTeX}}
+%"Beamer is a {\LaTeX}class for creating presentations
+%that are held using a projector..."
+%\end{alertblock}
+
+%\begin{columns}[t]
+%\column{.5\textwidth}
+%\begin{block}{Column 1 Header}
+%Column 1 Body Text
+%\end{block}
+%\column{.5\textwidth}
+%\begin{block}{Column 2 Header}
+%Column 2 Body Text
+%\end{block}
+%\end{columns}
+
+%\shadowbox{Sample Text}
+%\fbox{Sample Text}
+%\doublebox{Sample Text}
+%\ovalbox{Sample Text}
+%\Ovalbox{Sample Text}
+
+%\section*{Proyecto postdoctoral} * para que no aparezca en el contenido
