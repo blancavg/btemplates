@@ -33,13 +33,18 @@
 \setbeamertemplate{navigation symbols}{}
 
 % changing colors
-\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NavyBlue}
-\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=CornflowerBlue}
-\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=SpringGreen}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=Blue}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=BrickRed}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=Dandelion}
 
 % changing rounded blocks,comment to rounded and shadowed blocks
 \setbeamertemplate{blocks}[default]
 
+% changing rounded bullets and their color
+\setbeamerfont{section number projected}{%
+  family=\sffamily,series=\bfseries,size=\small}
+\setbeamercolor{section number projected}{bg=Blue,fg=white}
+\setbeamertemplate{sections/subsections in toc}[square] %ball, circle, square
 
 % define colors
 %\usecolortheme[RGB={205,173,0}]{structure} 

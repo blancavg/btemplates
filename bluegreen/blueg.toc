@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.07pt}
+\select@language {spanish}
+\beamer@sectionintoc {2}{Secci\'{o}n 1}{3}{0}{1}
+\beamer@sectionintoc {3}{Secci\'{o}n 2}{4}{0}{2}

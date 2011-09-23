@@ -1,4 +1,4 @@
-\documentclass[xcolor=dvipsnames]{beamer}
+\documentclass[xcolor=svgnames]{beamer}
 %\documentclass[xcolor=svgnames]{beamer} 
 \usepackage{epsfig}
 \usepackage{graphicx}
@@ -33,13 +33,18 @@
 \setbeamertemplate{navigation symbols}{}
 
 % changing colors
-\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NavyBlue}
-\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=CornflowerBlue}
-\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=SpringGreen}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=Gray}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=DarkGray}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=Silver}
 
 % changing rounded blocks,comment to rounded and shadowed blocks
 \setbeamertemplate{blocks}[default]
 
+% changing rounded bullets and their color
+\setbeamerfont{section number projected}{%
+  family=\sffamily,series=\bfseries,size=\small}
+\setbeamercolor{section number projected}{bg=Gray,fg=white}
+\setbeamertemplate{sections/subsections in toc}[square] %ball, circle, square
 
 % define colors
 %\usecolortheme[RGB={205,173,0}]{structure} 
@@ -76,14 +81,14 @@
   \tableofcontents%[pausesections]
 \end{frame}
 %-------------------------------------
-\section{Secci\'{o}n 1}
+\section{Secci'on 1}
 \begin{frame}{Introduction}
 Intro
 \url{http://www.bookcrossing.com/}
 \end{frame}
 
 %-------------------------------------
-\section{Secci\'{o}n 2}
+\section{Secci'on 2}
 
 \begin{frame}{Bloque}
 \begin{block}{Introduction to {\LaTeX}}
